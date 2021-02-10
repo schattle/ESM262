@@ -1,0 +1,18 @@
+---
+title: "Assignment1a"
+author: "Lizzy Schattle"
+date: "2/9/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Why I'm Taking 262m**
+
+I am taking this course to get better at organizing my data structure and get faster at figuring out how to code things efficiently by using functions and loops. I feel like I need practice in using those because I don't ever really know what I'm doing when I try to use them. Overall, I'd like to be a better data scientist and save myself a lot of time and frustration by improving on my basic data science skills and data handling.
+
+**My Data Science Background**
+
+My data science background for all intents and purposes begins at Bren. I'm doing the data science focus which just means that I've taken 206 and 244 with Alison Horst. For various classes I've done miscellaneous tasks in R and for my group project I've done a bit of coding in R and an even smaller bit of coding in Java for Google Earth Engine, but it was mostly copy-and-pasting similar code from tutorials.
