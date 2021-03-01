@@ -1,0 +1,85 @@
+---
+title: "Assignment 3"
+subtitle: "while & case_when"
+author: "Lizzy Schattle"
+date: "2/28/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Create a function that contains a *while* loop
+```{r}
+# if a population decreases by 2% annually, how long will it take for the species to go extinct if the current population is 2000 individuals?
+
+
+# initial conditions
+yr = 1
+pop_size = 2000
+
+yrs_to_extinction = function(pop_size, yr) {
+# while loop
+while ((pop_size > 1) && (yr < 1000))  {
+# decrease pop
+pop_size = pop_size - 0.02 * pop_size 
+# measure time
+yr = yr + 1
+}
+}
+
+pop_size
+yr
+
+```
+
+
+Create another function that uses *case_when*
+```{r}
+library(tidyverse)
+# function purpose: inform the threat status of a species based on population size and population growth rate
+
+#Species is critically endangered if population is less that 100 and growth is negative
+#Species is threatened if population is less that 1000 and growth is negative
+#Species is least concern if not
+  
+# some fake data to try the function
+population = runif(min = 1, max = 2000, n = 100)
+growth = runif(min = 0, max = 2, n = 100)
+
+species_classification = function(population, growth) {
+  
+# start with some error checking
+if (population <= 1) {
+   return("Population is Extinct") }
+  
+  else{
+# into the statement
+  if (growth < 1) {
+   status = case_when(population <= 100 ~ "critically endangered",
+                     population > 100 ~ "threatened")
+  } 
+  else {
+    status = "least concern" }
+  }
+  return(status)
+}
+
+status <- mapply(species_classification, population, growth)
+
+status
+
+```
+
+
+Provide an example use of your function in an Rmarkdown document
+
+Submit on link to github on Gauchospace as usual
+
+*Remember to use good programming practices; documentation, error-checking,
+
+understandable variable names
+
+AND go through DataTypes.RMD
