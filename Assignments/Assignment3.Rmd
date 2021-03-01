@@ -41,10 +41,10 @@ Create another function that uses *case_when*
 library(tidyverse)
 # function purpose: inform the threat status of a species based on population size and population growth rate
 
-#Species is critically endangered if population is less that 100 and growth is negative
-#Species is threatened if population is less that 1000 and growth is negative
-#Species is least concern if not
-  
+#Species is critically endangered if population is less that 100 and growth is less than 1
+#Species is threatened if population is greater than 100 and growth is less than 1
+#Species is least concern if groeth is greater than 1
+
 # some fake data to try the function
 population = runif(min = 1, max = 2000, n = 100)
 growth = runif(min = 0, max = 2, n = 100)
@@ -72,14 +72,3 @@ status <- mapply(species_classification, population, growth)
 status
 
 ```
-
-
-Provide an example use of your function in an Rmarkdown document
-
-Submit on link to github on Gauchospace as usual
-
-*Remember to use good programming practices; documentation, error-checking,
-
-understandable variable names
-
-AND go through DataTypes.RMD

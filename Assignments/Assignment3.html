@@ -404,10 +404,10 @@ pop_size</code></pre>
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code># function purpose: inform the threat status of a species based on population size and population growth rate
 
-#Species is critically endangered if population is less that 100 and growth is negative
-#Species is threatened if population is less that 1000 and growth is negative
-#Species is least concern if not
-  
+#Species is critically endangered if population is less that 100 and growth is less than 1
+#Species is threatened if population is greater than 100 and growth is less than 1
+#Species is least concern if groeth is greater than 1
+
 # some fake data to try the function
 population = runif(min = 1, max = 2000, n = 100)
 growth = runif(min = 0, max = 2, n = 100)
@@ -433,45 +433,40 @@ if (population &lt;= 1) {
 status &lt;- mapply(species_classification, population, growth)
 
 status</code></pre>
-<pre><code>##   [1] &quot;least concern&quot;         &quot;threatened&quot;            &quot;threatened&quot;           
-##   [4] &quot;threatened&quot;            &quot;threatened&quot;            &quot;threatened&quot;           
-##   [7] &quot;threatened&quot;            &quot;critically endangered&quot; &quot;least concern&quot;        
-##  [10] &quot;threatened&quot;            &quot;least concern&quot;         &quot;least concern&quot;        
-##  [13] &quot;least concern&quot;         &quot;least concern&quot;         &quot;threatened&quot;           
-##  [16] &quot;critically endangered&quot; &quot;least concern&quot;         &quot;threatened&quot;           
-##  [19] &quot;threatened&quot;            &quot;threatened&quot;            &quot;threatened&quot;           
-##  [22] &quot;threatened&quot;            &quot;least concern&quot;         &quot;least concern&quot;        
-##  [25] &quot;least concern&quot;         &quot;threatened&quot;            &quot;critically endangered&quot;
-##  [28] &quot;threatened&quot;            &quot;threatened&quot;            &quot;least concern&quot;        
-##  [31] &quot;least concern&quot;         &quot;threatened&quot;            &quot;least concern&quot;        
+<pre><code>##   [1] &quot;least concern&quot;         &quot;threatened&quot;            &quot;least concern&quot;        
+##   [4] &quot;threatened&quot;            &quot;least concern&quot;         &quot;least concern&quot;        
+##   [7] &quot;threatened&quot;            &quot;threatened&quot;            &quot;least concern&quot;        
+##  [10] &quot;least concern&quot;         &quot;threatened&quot;            &quot;least concern&quot;        
+##  [13] &quot;threatened&quot;            &quot;least concern&quot;         &quot;least concern&quot;        
+##  [16] &quot;least concern&quot;         &quot;threatened&quot;            &quot;least concern&quot;        
+##  [19] &quot;critically endangered&quot; &quot;threatened&quot;            &quot;least concern&quot;        
+##  [22] &quot;least concern&quot;         &quot;least concern&quot;         &quot;least concern&quot;        
+##  [25] &quot;threatened&quot;            &quot;threatened&quot;            &quot;threatened&quot;           
+##  [28] &quot;threatened&quot;            &quot;least concern&quot;         &quot;threatened&quot;           
+##  [31] &quot;threatened&quot;            &quot;threatened&quot;            &quot;threatened&quot;           
 ##  [34] &quot;least concern&quot;         &quot;threatened&quot;            &quot;least concern&quot;        
-##  [37] &quot;threatened&quot;            &quot;least concern&quot;         &quot;least concern&quot;        
-##  [40] &quot;least concern&quot;         &quot;least concern&quot;         &quot;threatened&quot;           
-##  [43] &quot;least concern&quot;         &quot;threatened&quot;            &quot;threatened&quot;           
-##  [46] &quot;least concern&quot;         &quot;threatened&quot;            &quot;threatened&quot;           
-##  [49] &quot;least concern&quot;         &quot;least concern&quot;         &quot;least concern&quot;        
-##  [52] &quot;threatened&quot;            &quot;threatened&quot;            &quot;least concern&quot;        
-##  [55] &quot;threatened&quot;            &quot;threatened&quot;            &quot;least concern&quot;        
-##  [58] &quot;least concern&quot;         &quot;threatened&quot;            &quot;critically endangered&quot;
+##  [37] &quot;least concern&quot;         &quot;threatened&quot;            &quot;least concern&quot;        
+##  [40] &quot;least concern&quot;         &quot;threatened&quot;            &quot;least concern&quot;        
+##  [43] &quot;threatened&quot;            &quot;threatened&quot;            &quot;least concern&quot;        
+##  [46] &quot;least concern&quot;         &quot;least concern&quot;         &quot;threatened&quot;           
+##  [49] &quot;least concern&quot;         &quot;threatened&quot;            &quot;threatened&quot;           
+##  [52] &quot;threatened&quot;            &quot;least concern&quot;         &quot;threatened&quot;           
+##  [55] &quot;least concern&quot;         &quot;least concern&quot;         &quot;critically endangered&quot;
+##  [58] &quot;threatened&quot;            &quot;threatened&quot;            &quot;least concern&quot;        
 ##  [61] &quot;threatened&quot;            &quot;least concern&quot;         &quot;least concern&quot;        
-##  [64] &quot;least concern&quot;         &quot;least concern&quot;         &quot;least concern&quot;        
-##  [67] &quot;least concern&quot;         &quot;threatened&quot;            &quot;least concern&quot;        
-##  [70] &quot;least concern&quot;         &quot;least concern&quot;         &quot;least concern&quot;        
-##  [73] &quot;threatened&quot;            &quot;least concern&quot;         &quot;least concern&quot;        
+##  [64] &quot;threatened&quot;            &quot;least concern&quot;         &quot;threatened&quot;           
+##  [67] &quot;threatened&quot;            &quot;threatened&quot;            &quot;least concern&quot;        
+##  [70] &quot;threatened&quot;            &quot;least concern&quot;         &quot;threatened&quot;           
+##  [73] &quot;threatened&quot;            &quot;least concern&quot;         &quot;threatened&quot;           
 ##  [76] &quot;least concern&quot;         &quot;threatened&quot;            &quot;threatened&quot;           
-##  [79] &quot;threatened&quot;            &quot;critically endangered&quot; &quot;threatened&quot;           
-##  [82] &quot;least concern&quot;         &quot;threatened&quot;            &quot;least concern&quot;        
-##  [85] &quot;least concern&quot;         &quot;critically endangered&quot; &quot;threatened&quot;           
-##  [88] &quot;least concern&quot;         &quot;least concern&quot;         &quot;least concern&quot;        
-##  [91] &quot;least concern&quot;         &quot;threatened&quot;            &quot;least concern&quot;        
-##  [94] &quot;threatened&quot;            &quot;threatened&quot;            &quot;threatened&quot;           
+##  [79] &quot;least concern&quot;         &quot;least concern&quot;         &quot;threatened&quot;           
+##  [82] &quot;least concern&quot;         &quot;least concern&quot;         &quot;threatened&quot;           
+##  [85] &quot;threatened&quot;            &quot;threatened&quot;            &quot;least concern&quot;        
+##  [88] &quot;threatened&quot;            &quot;least concern&quot;         &quot;threatened&quot;           
+##  [91] &quot;least concern&quot;         &quot;least concern&quot;         &quot;threatened&quot;           
+##  [94] &quot;least concern&quot;         &quot;threatened&quot;            &quot;least concern&quot;        
 ##  [97] &quot;least concern&quot;         &quot;least concern&quot;         &quot;least concern&quot;        
-## [100] &quot;critically endangered&quot;</code></pre>
-<p>Provide an example use of your function in an Rmarkdown document</p>
-<p>Submit on link to github on Gauchospace as usual</p>
-<p>*Remember to use good programming practices; documentation, error-checking,</p>
-<p>understandable variable names</p>
-<p>AND go through DataTypes.RMD</p>
+## [100] &quot;least concern&quot;</code></pre>
 
 
 
